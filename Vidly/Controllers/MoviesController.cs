@@ -5,16 +5,30 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
  
     public class MoviesController : Controller
     {
-        [Route("movies/released/{year}/{month:regex(\\d{4})}")]
-        public ActionResult ByReleaseDate(int year, int month)
+        public ActionResult Random()
         {
-            return Content(year + "/" + month);
+            var movie = new Movie() {Name = "shrek!"};
+            var customers = new List<Customer>
+            {
+                new Customer {Name = "Customer 1"},
+                new Customer {Name = "Customer 2"}
+            };
+
+            var viewModel = new RandomMovieViewModel
+            {
+                Movie = movie,
+                Customers = customers
+            };
+
+            return View(viewModel);
         }
+
     }       
 }
